@@ -1,0 +1,65 @@
+{% extends 'admin/master.html' %}
+<link href="{{url_for('static', filename='css/tracuu.css')}}" rel="stylesheet">
+
+{% block body %}
+{% if msg %}
+<div class="alert alert-success">
+    <h3>{{ msg }}</h3>
+</div>
+{% endif %}
+
+{% if err %}
+<div class="alert alert-danger">
+    <h3>{{ err }}</h3>
+</div>
+{% endif %}
+<h1 class="text-center text-info" style="margin:50px 0">Lập Lịch đặt vé xe khách</h1>
+
+<form action="{{ url_for('lap_lich_td') }}" class="laplich" method="POST">
+    <div class="flex body-laplich">
+        <div class="info-benxe">
+            <lable class="laplich__lb">Bến Xe đi:</lable>
+            <select class="input" name="benxedi">
+                {% for s in benxes %}
+                <option value="{{ s.ten_Ben_xe }}">{{ s.ten_Ben_xe }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="info-benxe">
+            <lable class="laplich__lb">Bến Xe đến:</lable>
+            <select class="input" name="benxeden">
+                {% for s in benxes %}
+                <option value="{{ s.ten_Ben_xe }}">{{ s.ten_Ben_xe }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="info-thoigiankhoihanh">
+            <label class="laplich__lb">Thời gian khởi hành:</label>
+            <input required class="input" type="datetime-local" name="datetime"/>
+        </div>
+        <div class="info-tg_chay">
+            <label class="laplich__lb">Thời gian chạy: </label>
+            <input required type="number" class="number" min="0" max="24" value="0" name="hours"> <span
+                class="laplich_span"> Tiếng </span>
+            <input required type="number" class="number" min="0" max="59" value="30" name="minutes"> <span
+                class="laplich_span"> Phút</span>
+        </div>
+    </div>
+
+    <div class="info-giave">
+        <div class="giave">
+            <lable class="laplich__lb">Giá vé hạng 1:</lable>
+            <input required class="input" type="text" name="price_1"/>
+        </div>
+        <div class="giave">
+            <lable class="laplich__lb">Giá vé hạng 2:</lable>
+            <input required class="input" type="text" name="price_2"/>
+        </div>
+    </div>
+    <div class="group-btn">
+        <input onclick="luulich_success('Bạn muốn tạo tuyến đường?')" type="submit" value="Lập Lich"
+               class="btn btn-primary button">
+        <button class="btn btn-outline-primary button">Hủy</button>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+{% if tuyenduongs %}
+<h1 class="text-center text-info" xmlns="http://www.w3.org/1999/html">Các Tuyến đường từ {{ bx1 }} - {{ bx2 }}</h1>
+<table class="table">
+    <thead class="text-center">
+    <tr>
+        <th class="text-info">Tên Tuyến Đường</th>
+        <th class="text-info">Bến Xe Đi</th>
+        <th class="text-info">Bến Xe Đến</th>
+        <th class="text-info">Giá Tiền</th>
+    </tr>
+    </thead>
+    <tbody class="text-center">
+    {% for i in range(count) %}
+    <tr class="tuyenduong">
+        <td>{{ tuyenduongs[i].ten_tuyen_duong }}</td>
+        <td>
+            <h5 class="line-1">{{ tuyenduongs[i].ben_xe[0] }}</h5>
+            <h5 class="line-2">{{ "{:%H:%M}".format(tuyenduongs[i].tg_khoihanh) }}</h5>
+            <h5 class="line-3">{{ "{:%d %b, %Y}".format(tuyenduongs[i].tg_khoihanh) }}</h5>
+        </td>
+        <td>
+            <h5 class="line-1">{{ tuyenduongs[i].ben_xe[1] }}</h5>
+            <h5 class="line-2">{{ "{:%H:%M}".format(tg_dens[i]) }}</h5>
+            <h5 class="line-3">{{ "{:%d %b, %Y}".format(tg_dens[i]) }}</h5>
+        </td>
+        <td>
+            <h4 class="line-1" style="font-size:20px">{{ tuyenduongs[i].giave_hv2 }}</h4>
+            <a href="/datve/id={{tuyenduongs[i].id}}" class="btn btn-primary input datve">Đặt Vé</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="alert alert-danger">
+    <h3>Không có chuyến bay nào</h3>
+</div>
+{% endif %}
+{% endblock %}

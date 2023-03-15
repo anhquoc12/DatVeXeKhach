@@ -1,0 +1,42 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+{% for e in err %}
+<div class="alert alert-danger">
+    <h3>{{ e }}</h3>
+</div>
+{% endfor %}
+<form action="{{ url_for('check_tracuu') }}" class="form_tracuu" method="get">
+
+    <h1 class="title">Tra cứu chuyến bay</h1>
+    <div class="form__body">
+        <div class="form__info_benxe">
+            <div class="tracuu__benxe">
+                <label>Bến Xe đi:</label>
+                <select class="input" tyle="text-align:center" name="benxe1">
+                    {% for benxe in benxes %}
+                    <option value="{{ benxe.ten_Ben_xe }}" style="text-align:left">{{ benxe.ten_Ben_xe }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <i class="fa-solid fa-right-long from-to "></i>
+            <div class="tracuu__benxeden">
+                <label>Bến Xe đến:</label>
+                <select class="input" name="benxe2">
+                    {% for benxe in benxes %}
+                    <option value="{{ benxe.ten_Ben_xe }}" style="text-align:left">{{ benxe.ten_Ben_xe }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="tracuu__time">
+            <label>
+                Thời gian
+            </label>
+            <input type="date" class="input" name="date">
+        </div>
+        <div class="btn-search">
+            <input type="submit" value="Tìm Tuyến Đường" class="btn btn-primary">
+        </div>
+    </div>
+</form>
+{% endblock %}
